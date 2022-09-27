@@ -65,7 +65,6 @@ const Home = () => {
                 <div className='mx-10 cursor-pointer bg-slate-700 rounded-xl w-24 text-center hover:bg-zinc-600 transition-colors ease-in-out duration-500' onClick={() => setFilter(true)}>Not Done</div>
                 <div className='mx-10 cursor-pointer bg-slate-700 rounded-xl w-24 text-center hover:bg-zinc-600 transition-colors ease-in-out duration-500' onClick={() => setFilter(false)}>Done</div>
         </div>
-
         {todos.map(todo => ( todo.isCompleted !== filter &&
             <TodoItem key={todo._id} todo={todo} changeToDo={changeToDo} removeToDo={removeToDo}/>
         ))}        
