@@ -20,8 +20,11 @@ const todosData = [
 },
 ]
 
+
+
 const Home = () => {
     const [todos, setTodos] = useState(todosData)
+    const [filter, setFilter] = useState('')
 
     const changeToDo = (id) => {
         const copy = [...todos]
@@ -57,8 +60,13 @@ const Home = () => {
         <h1 className="text-2xl w-full font-bold mb-4 text-center">To-Do List</h1>
 
         <AddToDoField addToDo={addToDo}/>
+        <div className="w-fit mb-4 flex mx-auto">
+                <button className='mx-10' onClick={() => setFilter('')}>All</button>
+                <button className='mx-10' onClick={() => setFilter(false)}>Done</button>
+                <button className='mx-10' onClick={() => setFilter(true)}>Not Done</button>
+        </div>
 
-        {todos.map(todo => (
+        {todos.map(todo => ( todo.isCompleted !== filter &&
             <TodoItem key={todo._id} todo={todo} changeToDo={changeToDo} removeToDo={removeToDo}/>
         ))}        
     </div>
