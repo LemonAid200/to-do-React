@@ -2,25 +2,37 @@ import { makeObservable, observable, action } from 'mobx';
 // Added store
 
 class Store {
-    todosList = []
-    filter = null
-    constructor(todosList, filter){
-        this.todosList = todosList
-        this.filter = filter
+    todosList
+    filter
+
+    constructor(){
+        this.todosList = []
+        this.filter = 'All'
         makeObservable(this, {
             todosList: observable,
             filter: observable,
-            changeToDo: action,
+            changeToDoStatus: action,
             removeToDo: action,
             addToDo: action,
             getRandomKey: action,
             changeFilter: action
         })
     }
-    changeToDo(id) {
+
+    addToDo (title) {
+        if (title.length > 0){
+            this.todosList = [{
+                _id: this.getRandomKey(),
+                title,
+                status: 'Not done'
+            }, ...this.todosList]
+        }
+    }
+
+    changeToDoStatus(id, status) {
         const copy = [...this.todosList]
         const current = copy.find(t => t._id === id)
-        current.isCompleted = !current.isCompleted
+        current.status === 'Done' ? current.status = 'Not done' : current.status = 'Done'
         this.todosList = copy
     }
 
@@ -34,18 +46,15 @@ class Store {
         this.todosList = [...this.todosList].filter(t => t._id !== id)
     }
 
-    addToDo (title) {
-        if (title.length > 0){
-            this.todosList = [{
-                _id: this.getRandomKey(),
-                title,
-                isCompleted: false
-            }, ...this.todosList]
-        }
+    changeFilter(filter = 'All'){
+        this.filter = filter
     }
 
-    changeFilter(filter = ''){
-        this.filter = filter
+    getFilteredToDos(){
+        const filteredList = this.todosList.filter(todo => {
+            if (todo.status === this.filter || this.filter === 'All') return true
+            else return false})        
+        return filteredList
     }
 }
 

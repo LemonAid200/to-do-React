@@ -4,28 +4,7 @@ import AddToDoField from './AddToDoField'
 import { observer } from 'mobx-react-lite'
 import Store from '../../../store/store'
 
-const todosData = [
-{
-    _id: 'www',
-    title: 'Do stuff',
-    isCompleted: false
-},
-{
-    _id: 'www2',
-    title: 'Do other stuff',
-    isCompleted: true
-},
-{
-    _id: 'www1',
-    title: 'Do different stuff',
-    isCompleted: false
-},
-]
-
-
-const store = new Store(todosData)
-
-
+const store = new Store()
 
 const Home = () => {
 
@@ -36,11 +15,11 @@ const Home = () => {
         
         <AddToDoField store={store}/>
         <div className="grid grid-cols-3 gap-4 content-start my-5">
-                <div className='cursor-pointer text-center self-center  bg-slate-700 rounded-xl w-14 hover:bg-zinc-600 transition-colors ease-in-out duration-500'  onClick={() => store.changeFilter()}>All</div>
-                <div className='cursor-pointer text-center bg-slate-700 rounded-xl w-24 hover:bg-zinc-600 transition-colors ease-in-out duration-500' onClick={() => store.changeFilter(true)}>Not Done</div>
-                <div className='cursor-pointer text-center self-center bg-slate-700 rounded-xl w-14 hover:bg-zinc-600 transition-colors ease-in-out duration-500' onClick={() => store.changeFilter(false)}>Done</div>
+                <div className='cursor-pointer text-center self-center  bg-slate-700 rounded-xl w-14 hover:bg-zinc-600 transition-colors ease-in-out duration-500'  onClick={() => store.changeFilter('All')}>All</div>
+                <div className='cursor-pointer text-center bg-slate-700 rounded-xl w-24 hover:bg-zinc-600 transition-colors ease-in-out duration-500' onClick={() => store.changeFilter('Not done')}>Not Done</div>
+                <div className='cursor-pointer text-center self-center bg-slate-700 rounded-xl w-14 hover:bg-zinc-600 transition-colors ease-in-out duration-500' onClick={() => store.changeFilter('Done')}>Done</div>
         </div>
-        {store.todosList.map(todo => ( todo.isCompleted !== store.filter &&
+        {store.getFilteredToDos().map(todo => (
             <TodoItem key={todo._id} todo={todo} store={store}/>
         ))}        
     </div>

@@ -8,9 +8,9 @@ const TodoItem = ({todo, store}) => {
     <div className='flex items-center mb-4 justify-between
      bg-slate-800 rounded-xl p-2 cursor-pointer'>
      <span className='flex items-center'>
-        <Checkbox isCompleted={todo.isCompleted} store={store} todo={todo}/>
+        <Checkbox status={todo.status} store={store} todo={todo}/>
         <span className={cn({
-          'line-through': todo.isCompleted
+          'line-through': todo.status ==='Done'
         })}>{todo.title}</span>
       </span>
 
