@@ -59,11 +59,12 @@ const Home = () => {
     <div className='w-4/5 mx-auto p-1 overflow-auto'>
         <h1 className="text-2xl w-full font-bold mb-4 text-center">To-Do List</h1>
 
+        
         <AddToDoField addToDo={addToDo}/>
-        <div className="w-fit mb-4 flex mx-auto">
-                <div className='mx-10 cursor-pointer bg-slate-700 rounded-xl w-14 text-center hover:bg-zinc-600 transition-colors ease-in-out duration-500'  onClick={() => setFilter('')}>All</div>
-                <div className='mx-10 cursor-pointer bg-slate-700 rounded-xl w-24 text-center hover:bg-zinc-600 transition-colors ease-in-out duration-500' onClick={() => setFilter(true)}>Not Done</div>
-                <div className='mx-10 cursor-pointer bg-slate-700 rounded-xl w-14 text-center hover:bg-zinc-600 transition-colors ease-in-out duration-500' onClick={() => setFilter(false)}>Done</div>
+        <div className="grid grid-cols-3 gap-4 content-start">
+                <div className='cursor-pointer text-center self-center  bg-slate-700 rounded-xl w-14 hover:bg-zinc-600 transition-colors ease-in-out duration-500'  onClick={() => setFilter('')}>All</div>
+                <div className='cursor-pointer text-center bg-slate-700 rounded-xl w-24 hover:bg-zinc-600 transition-colors ease-in-out duration-500' onClick={() => setFilter(true)}>Not Done</div>
+                <div className='cursor-pointer text-center self-center bg-slate-700 rounded-xl w-14 hover:bg-zinc-600 transition-colors ease-in-out duration-500' onClick={() => setFilter(false)}>Done</div>
         </div>
         {todos.map(todo => ( todo.isCompleted !== filter &&
             <TodoItem key={todo._id} todo={todo} changeToDo={changeToDo} removeToDo={removeToDo}/>
