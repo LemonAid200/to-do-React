@@ -22,9 +22,8 @@ const todosData = [
 },
 ]
 
-const filter = null
 
-const store = new Store(todosData, filter)
+const store = new Store(todosData)
 
 
 
